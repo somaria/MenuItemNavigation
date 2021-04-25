@@ -8,9 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    var menuButtons = ["Profile", "About Us", "Contact Us"]
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView { /// 1.
+            VStack { /// 2.
+                ForEach(menuButtons, id: \.self) { menu in
+                    NavigationLink(
+                        destination:
+                            Group { /// 3.
+                                if menu == "Profile" {
+                                    Profile()
+                                }
+                                if menu == "About Us" {
+                                    AboutUs()
+                                }
+                            }
+                    ) {
+                        Text(menu)
+                    }
+                }
+            }
+        }
     }
 }
 
